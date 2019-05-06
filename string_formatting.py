@@ -1,0 +1,5 @@
+print("Heil {:>10}".format("Hydra"))
+print("Heil {:10}".format("Hydra"))
+print("Heil {}".format("Hydra"))
+print("Heil {:_<7}".format("Hydra"))
+print("Heil {:^10}".format("Hydra"))
