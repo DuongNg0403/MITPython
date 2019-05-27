@@ -26,7 +26,10 @@ def hangman(secret_word):
         print("You have {} warnings left".format(num_warnings))
         print("Available letters:"+ str(hangmanFunc.get_available_letters(letter_guessed)))
         player_guess = str(input("Please guess a letter... ")).lower()
-
+        #Hint call
+        if player_guess == '*':
+            print("Possible word matches are: {}".format(hangmanFunc.show_possible_matches(hangmanFunc.get_guessed_word(secret_word,letter_guessed))))
+            continue
         #Check user's input and subtract warnings
         if num_warnings < 1:
             print("You are out of warnings, penalty is now applied")
@@ -47,6 +50,7 @@ def hangman(secret_word):
         elif player_guess in ["a", "e", "i", "o"] and not player_guess in secret_word_list:
             print("Oops! That letter is not in my word. You lose 2 guesses because it's a vowel :)))):")
             num_guesses-=2
+
         else:
             print("Oops! That letter is not in my word :):")
             num_guesses -=1                    

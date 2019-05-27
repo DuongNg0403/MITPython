@@ -80,7 +80,7 @@ def use_file():
     Use the file words.txt to generate hangman secret word'''
     print("Loading wordlist from file ... ")
     
-    word_file = open("words.txt" ,"r")
+    word_file = open("D:\Python\MITPython\ps2\words.txt" ,"r")
     words = word_file.readline() #word is string
     word_list = words.split()
     print("{} words loaded".format(len(word_list)))
@@ -92,3 +92,34 @@ def random_secret_word(word_list):
     '''
     import random
     return random.choice(word_list)
+
+def match_with_gaps(my_word, other_word):
+    '''
+    matching the current guessed word
+    Return True or False
+    '''
+    stripped_word = my_word.replace(" ","")
+    if len(stripped_word) != len(other_word):
+        return False
+    my_word_list = split_char(stripped_word)
+    other_word_list = split_char(other_word)
+    for i in range (len(my_word_list)):
+        if my_word_list[i] == '_':
+            continue
+        elif my_word_list[i] != other_word_list[i]:
+            return False
+    return True
+
+def show_possible_matches(my_word):#super inefficient but i'm dumb so brute force
+    '''
+    Return possible matches with the secret word
+    Could go through the whole list, not recommended
+    '''
+    word_list = use_file()
+    possible_matches = []
+    for word in word_list:
+        if match_with_gaps(my_word, word):
+            possible_matches.append(word)
+    possible_word = " ".join(possible_matches)
+    return possible_word   
+
