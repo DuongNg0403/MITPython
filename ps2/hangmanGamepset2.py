@@ -63,7 +63,14 @@ def hangman(secret_word):
             break
         if num_guesses <= 0:
             print("You lost, too bad the word was {} :)".format(secret_word))
-
-#            input("Input 1 to play again or 0 otherwise") 
+    play_game = input("Input 1 to play again or 0 otherwise...")
+    return play_game 
 #TEST PASSED still working fine i guess   
-hangman(hangmanFunc.random_secret_word(hangmanFunc.use_file()))
+
+def hangman_Call(a):
+    if a == 1:
+        ans = hangman(hangmanFunc.random_secret_word(hangmanFunc.use_file()))
+        return hangman_Call(ans)
+    else: print("End Game")
+
+hangman_Call(1)    
