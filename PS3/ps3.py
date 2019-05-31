@@ -10,6 +10,7 @@
 import math
 import random
 import string
+import ps3Func
 
 VOWELS = 'aeiou'
 CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
@@ -91,8 +92,17 @@ def get_word_score(word, n):
     n: int >= 0
     returns: int >= 0
     """
+    word_char = ps3Func.split_char(word)
+    first_comp = 0 #first component
+    for letter in word_char:
+        first_comp += SCRABBLE_LETTER_VALUES[letter]
+
+    #Second component    
+    if 7*len(word_char) - 3*(n-len(word_char)) >1:
+        second_comp = 7*len(word_char) - 3*(n-len(word_char))
+    else: second_comp = 1
     
-    pass  # TO DO... Remove this line when you implement this function
+    return first_comp* second_comp
 
 #
 # Make sure you understand how this function works and what it does!
