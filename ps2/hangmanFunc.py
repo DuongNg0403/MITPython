@@ -113,7 +113,7 @@ def match_with_gaps(my_word, other_word):
 def show_possible_matches(my_word):#super inefficient but i'm dumb so brute force
     '''
     Return possible matches with the secret word
-    Could go through the whole list, not recommended
+    not refined, still show already guess 
     '''
     word_list = use_file()
     possible_matches = []
