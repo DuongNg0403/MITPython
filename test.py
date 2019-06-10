@@ -1,2 +1,4 @@
-import string
-print(string.ascii_letters)
+import cProfile
+cProfile.run(2**30)
+
+
