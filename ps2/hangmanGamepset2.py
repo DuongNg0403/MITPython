@@ -59,18 +59,19 @@ def hangman(secret_word):
         #Win condition
         if hangmanFunc.is_word_guessed(secret_word, letter_guessed):
             print("Congrats, you won!!!^^")
+            print("The word was {}".format(secret_word))
             print("Your score is: {}".format(hangmanFunc.total_score(num_guesses, correct_guesses)))
             break
         if num_guesses <= 0:
             print("You lost, too bad the word was {} :)".format(secret_word))
-    play_game = input("Input 1 to play again or 0 otherwise...")
+    play_game = str(input("Input 1 to play again or anyother button otherwise..."))
     return play_game 
 #TEST PASSED still working fine i guess   
 
 def hangman_Call(a):
-    if a == 1:
+    if a == "1":
         ans = hangman(hangmanFunc.random_secret_word(hangmanFunc.use_file()))
         return hangman_Call(ans)
     else: print("End Game")
 
-hangman_Call(1)    
+hangman_Call("1")    
