@@ -262,3 +262,6 @@ print("----------------------------------------------------------------------")
 print("Testing wildcards...")
 test_wildcard(word_list)
 print("All done!")
+
+print(deal_hand(7))
+print(substitute_hand({'h':1, 'e':1, 'l':2, 'o':1, '*':1}, 'l'))
