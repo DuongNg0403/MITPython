@@ -16,14 +16,24 @@ def get_permutations(sequence):
     Returns: a list of all permutations of sequence
 
     Example:
-    >>> get_permutations('abc')
+    '>>> get_permutations('abc')
     ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
 
     Note: depending on your implementation, you may return the permutations in
     a different order than what is listed here.
     '''
+    if len(sequence) == 1:
+        L = [sequence]
+        return L
+    else:
+        L = get_permutations(sequence[1:])
+        new_L = []
+        for ele in L:
+            for pos in range(len(ele)+1):
+                new_L.append(ele[0:pos]+sequence[0]+ele[pos:])
+        return new_L
 
-    pass #delete this line and replace with your code here
+    
 
 if __name__ == '__main__':
 #    #EXAMPLE
@@ -36,5 +46,6 @@ if __name__ == '__main__':
 #    to be three characters or fewer as you will have n! permutations for a 
 #    sequence of length n)
 
-    pass #delete this line and replace with your code here
-
+    print(get_permutations("abc"))
+    print(get_permutations("bust"))
+    print(get_permutations("&@#"))
