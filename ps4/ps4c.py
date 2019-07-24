@@ -51,7 +51,7 @@ def is_word(word_list, word):
 
 ### END HELPER CODE ###
 
-WORDLIST_FILENAME = 'words.txt'
+WORDLIST_FILENAME = "/home/mike/Pythoncode/Py/ps4/words.txt"
 
 # you may find these constants helpful
 VOWELS_LOWER = 'aeiou'
@@ -70,7 +70,8 @@ class SubMessage(object):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        self.message_text = text
+        self.valid_words = load_words(WORDLIST_FILENAME)
     
     def get_message_text(self):
         '''
@@ -78,7 +79,7 @@ class SubMessage(object):
         
         Returns: self.message_text
         '''
-        pass #delete this line and replace with your code here
+        return self.message_text
 
     def get_valid_words(self):
         '''
@@ -87,7 +88,7 @@ class SubMessage(object):
         
         Returns: a COPY of self.valid_words
         '''
-        pass #delete this line and replace with your code here
+        return self.valid_words.copy()
                 
     def build_transpose_dict(self, vowels_permutation):
         '''
@@ -108,9 +109,28 @@ class SubMessage(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
+        cipher_map = {}
+        count = 0
+        punc = " !@#$%^&*()-_+=}{[]|\:;'<>?,./\""
+        for let in string.ascii_lowercase:
+            if let in "aeiou":
+                cipher_map[let] = vowels_permutation[count]
+                count+=1
+                continue
+            cipher_map[let]= let
+        count = 0
+        for let in string.ascii_uppercase:
+            if let.lower() in "aeiou":
+                cipher_map[let] = vowels_permutation[count].upper()
+                count+= 1
+                continue
+            cipher_map[let] = let
         
-        pass #delete this line and replace with your code here
-    
+        for char in punc:
+            cipher_map[char] = char
+        
+        return cipher_map
+            
     def apply_transpose(self, transpose_dict):
         '''
         transpose_dict (dict): a transpose dictionary
@@ -119,8 +139,14 @@ class SubMessage(object):
         on the dictionary
         '''
         
-        pass #delete this line and replace with your code here
-        
+        text = self.message_text
+        ciphered_list = []
+        for char in text:
+            ciphered_list.append(transpose_dict.get(char, 0))
+        ciphered_text = "".join(ciphered_list)
+        return ciphered_text
+
+
 class EncryptedSubMessage(SubMessage):
     def __init__(self, text):
         '''
@@ -132,7 +158,7 @@ class EncryptedSubMessage(SubMessage):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        SubMessage.__init__(self, text)
 
     def decrypt_message(self):
         '''
@@ -152,7 +178,17 @@ class EncryptedSubMessage(SubMessage):
         
         Hint: use your function from Part 4A
         '''
-        pass #delete this line and replace with your code here
+        combination = get_permutations("aeiou")
+        result = {}
+        for comb in combination:
+            de_text = self.apply_transpose(self.build_transpose_dict(comb))
+            word_count = 0
+            for word in de_text.split():
+                if is_word(self.valid_words, word) == True:
+                    word_count +=1
+            result[word_count]= de_text
+
+        return max(result.items())[1]
     
 
 if __name__ == '__main__':

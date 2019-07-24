@@ -36,7 +36,7 @@ def load_words():
     
     print("Loading word list from file...")
     # inFile: file
-    inFile = open("D:\Python\MITPython\PS3\words.txt", 'r')
+    inFile = open(WORDLIST_FILENAME, 'r')
     # wordlist: list of strings
     wordlist = []
     for line in inFile:

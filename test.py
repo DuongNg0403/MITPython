@@ -1,4 +1,3 @@
-import cProfile
-cProfile.run(2**30)
-
-
+string = "sadkfjhksja"
+string.replace("sad", " ")
+print(string)
