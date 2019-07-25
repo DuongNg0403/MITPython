@@ -55,6 +55,29 @@ def process(url):
 # Problem 1
 
 # TODO: NewsStory
+class NewsStory(object):
+    def __init__(self, guid, title, description, link, pubdate):
+        self.guid = guid
+        self.title = title
+        self.description = description
+        self.link = link
+        self.pubdate = pubdate
+
+    def get_guid(self):
+        return self.guid
+
+    def get_title(self):
+        return self.title
+
+    def get_description(self):
+        return self.description
+
+    def get_link(self):
+        return self.link
+
+    def get_pubdate(self):
+        return self.pubdate
+        
 
 
 #======================
@@ -74,10 +97,36 @@ class Trigger(object):
 
 # Problem 2
 # TODO: PhraseTrigger
+class PhraseTrigger(Trigger):
+    def __init__(self, phrase):
+        self.phrase = phrase.lower()
+        
+    def is_phrase_in(self, text):
+        mod_text = []
+        for char in text.lower():
+            if char in string.punctuation:
+                mod_text.append(" ")
+                continue
+            mod_text.append[char]
+
+        mod_text_str ="".join(mod_text)
+        text_words = mod_text_str.split(" ")
+        phrase_words = self.phrase.split(" ")
+        if phrase_words[0] in text_words:
+            for i in range(1,len(phrase_words)):
+                if not phrase_words[i] in text_words:
+                    return False
+            return True
+        
+        
 
 # Problem 3
 # TODO: TitleTrigger
+class TitleTrigger(PhraseTrigger):
+    def evaluate(self, story):
+        return self.is_phrase_in(story.get_title())
 
+    
 # Problem 4
 # TODO: DescriptionTrigger
 
